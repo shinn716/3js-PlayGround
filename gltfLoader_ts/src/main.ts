@@ -72,6 +72,7 @@ gui.add(options, 'animationIndex').onChange((value)=>{
 gui.add(options, 'play');
 
 // Init load first model
+
 scene.LoadGLTF('assets/Fox.glb')
 
 Loop()

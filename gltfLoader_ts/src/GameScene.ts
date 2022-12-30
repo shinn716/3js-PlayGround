@@ -11,7 +11,7 @@ export default class GameScene extends THREE.Scene
     private prevTime = Date.now()
     private animIndex: number = 0
 
-    private clips = []
+    private clips : THREE.AnimationClip[] = []
     private clipNames : string[] = []
 
 	constructor(camera: THREE.PerspectiveCamera)
@@ -52,6 +52,7 @@ export default class GameScene extends THREE.Scene
         this.group.remove(this.obj)
 
         const loader = new GLTFLoader();
+        console.log(path)
         loader.load(path, (loader) =>{
             this.obj = loader.scene
 
