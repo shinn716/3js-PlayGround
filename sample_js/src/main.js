@@ -1,7 +1,10 @@
 
 import * as THREE from '../node_modules/three/build/three.module';
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls';
-import Scene from './GameScene';
+import Scene from './Scene';
+
+
+const clock = new THREE.Clock();
 
 // Init
 console.log("Main-start");
@@ -22,7 +25,11 @@ myscene.Initialize();
 
 // loop
 function animate(time) {
+
+    const delta = clock.getDelta();
+    myscene.Update(delta);
     renderer.render(myscene, camera);
 }
 
 renderer.setAnimationLoop(animate);
+
