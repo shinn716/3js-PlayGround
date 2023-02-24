@@ -1,13 +1,31 @@
 import * as THREE from 'three/build/three.module';
 import MyLoader from './Loader';
 
+// let loader;
+// let booGizmos = false;
+
 export default class Object extends THREE.Scene {
 
-	constructor(name) {
+	booGizmos = function (value) {
+		return value;
+	}
+
+	loader = function (value) {
+		return value;
+	}
+
+
+
+	constructor(name, gizmos) {
 		super();
 		console.log("add: " + name);
 		this.myname = name;
+		this.booGizmos = gizmos;
 		this.Render();
+	}
+
+	GetName() {
+		return this.myname;
 	}
 
 
@@ -18,11 +36,19 @@ export default class Object extends THREE.Scene {
 		// const box = new THREE.Mesh(boxGeometry, boxMaterial);
 		// this.add(box);
 
+
 		this.loader = new MyLoader('https://sgmsavirtualbooth.blob.core.windows.net/test/gltf/Parrot.glb',
-		(result) => {
-			this.add(result);
-		},
-		0, 0, 0);
+			(result) => {
+				this.add(result);
+			},
+			0, 0, 0);
+
+		// console.log(this.loader);
+
+		if (!this.booGizmos)
+			return;
+		const axesHelper = new THREE.AxesHelper(50);
+		this.add(axesHelper);
 	}
 
 	SetPosAndRot(px, py, pz, rx, ry, rz) {
@@ -36,7 +62,7 @@ export default class Object extends THREE.Scene {
 		root.scale.set(size, size, size);
 	}
 
-	Play(delta){
+	Play(delta) {
 		this.loader.PlayAni(delta);
 	}
 }

@@ -27,18 +27,23 @@ export default class Scene extends THREE.Scene {
 		// this.add(box);
 
 		// add gizmos
-		const axesHelper = new THREE.AxesHelper(5);
-		this.add(axesHelper);
+		// const axesHelper = new THREE.AxesHelper(5);
+		// this.add(axesHelper);
 
 		// add custom model
-		this.myObj = new Obj('Parrot');
-		this.add(this.myObj);
-		this.myObj.SetPosAndRot(0, 0, 0, 0, 0, 0);
-		this.myObj.SetScale(.1);
+		this.myObj1 = new Obj('Parrot', true);
+		this.add(this.myObj1);
+		this.myObj1.SetPosAndRot(0, 0, 0, 0, 0, 0);
+		this.myObj1.SetScale(.1);
+
+		// this.myObj2 = new Obj('Parrot', true);
+		// this.add(this.myObj2);
+		// this.myObj2.SetPosAndRot(5, 5, 0, 0, 0, 0);
+		// this.myObj2.SetScale(.1);
 	}
 
 
 	Update(delta) {
-		this.myObj.Play(delta);
+		this.myObj1.Play(delta);
 	}
 }

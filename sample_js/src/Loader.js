@@ -5,6 +5,10 @@ let mixer;
 
 export default class Loader extends THREE.Scene {
 
+    // mixer = function (value) {
+	// 	return value;
+	// }
+
     constructor(path, callback, px, py, pz, size = 1) {
         super();
         console.log('loader');
