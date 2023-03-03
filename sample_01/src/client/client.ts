@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import { AxesHelper } from 'three';
+
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import Raycaster from './Raycaster';
@@ -36,17 +38,41 @@ function onWindowResize() {
 const stats = Stats()
 document.body.appendChild(stats.dom);
 
-
+// game scene
 const debug = document.getElementById('debug1') as HTMLDivElement;
 const game = new GameScene(scene, debug);
 game.init();
 game.drawGUI();
 
+// fristPersonController
 const controller = new FristPersonController(camera);
 controller.MouseEventInit();
 controller.KeyboardEventInit();
 
+// raycaster
 const raycaster = new Raycaster(camera, scene, game);
+raycaster.Events.addEventListener("customEvent", event => {
+    // console.log("Click pos:", event.data.customData);
+
+    const geometry = new THREE.BoxGeometry()
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        transparent: true,
+        opacity: .75,
+    })
+
+    let tgroup = new THREE.Group;
+    const cube = new THREE.Mesh(geometry, material)
+    cube.name = 'hotspot';
+
+    let pos = event.data.customData as THREE.Vector3
+    tgroup.position.set(pos.x, pos.y, pos.z);
+    tgroup.scale.set(.1, .1, .1);
+
+    tgroup.add(cube);
+    scene.add(tgroup)
+    tgroup.add(new AxesHelper(3));
+});
 
 console.log(scene.children);
 

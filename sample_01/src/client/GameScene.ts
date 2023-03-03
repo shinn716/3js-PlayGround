@@ -58,17 +58,15 @@ export default class GameScene {
 		const hemilight = new THREE.HemisphereLight(0x000000, 0xffffff, 1);
 		this.scene.add(hemilight);
 
-		// model https://sgmsavirtualbooth.blob.core.windows.net/test/Scenario_M1_bake.glb
 		this.loadModel(
-			'https://sgmsavirtualbooth.blob.core.winwwdows.net/test/showroom.glb',
-			// 'https://sgmsavirtualbooth.blob.core.windows.net/test/threejs_test_models/gltf/Scenario_M1.glb',
-			// 'https://sgmsavirtualbooth.blob.core.windows.net/test/threejs_test_models/gltf/Scenario_M1_nolight.glb',
+			// 'https://sgmsavirtualbooth.blob.core.winwwdows.net/test/showroom.glb',
+			'https://sgmsavirtualbooth.blob.core.windows.net/test/threejs_test_models/gltf/Scenario_M1_nolight.glb',
 			(result: THREE.Object3D<THREE.Event>) => {
 				this.group.add(result);
 			});
 
 		this.scene.add(this.group);
-		this.group.add(new AxesHelper(10));
+		// this.group.add(new AxesHelper(10));
 
 	}
 
