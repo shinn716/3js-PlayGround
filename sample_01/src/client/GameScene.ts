@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { GUI } from 'dat.gui'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-import { DirectionalLight } from 'three';
 
 export default class GameScene {
 
@@ -43,7 +42,7 @@ export default class GameScene {
 		console.log('scene init');
 
 		// add hdr
-		// this.LoadHDR('imgs/equirectangular/memorial.hdr', (result) => {
+		// this.LoadHDR('imgs/christmas_photo_studio_04_1k.hdr', (result) => {
 		// 	this.scene.background = result;
 		// });
 
@@ -59,15 +58,13 @@ export default class GameScene {
 		this.scene.add(hemilight);
 
 		this.LoadModel(
-			// 'https://sgmsavirtualbooth.blob.core.winwwdows.net/test/showroom.glb',
+			// 'https://sgmsavirtualbooth.blob.core.windows.net/test/showroom.glb',
 			'https://sgmsavirtualbooth.blob.core.windows.net/test/threejs_test_models/gltf/Scenario_M1_nolight.glb',
 			(result: THREE.Object3D<THREE.Event>) => {
 				this.group.add(result);
 			});
-
 		this.scene.add(this.group);
 		// this.group.add(new AxesHelper(10));
-
 
 		// add Grid Helper
 		const size = 25;
@@ -95,7 +92,9 @@ export default class GameScene {
 
 	}
 
-	LoadHDR(path: string, callback: { (arg0: THREE.Color | THREE.Texture): void; }) {
+	LoadHDR(path: string, callback: {
+		(arg0: THREE.Color | THREE.Texture): void;
+	}) {
 		new RGBELoader().load(path, function (texture) {
 			texture.mapping = THREE.EquirectangularReflectionMapping;
 			callback(texture);
@@ -158,7 +157,7 @@ export default class GameScene {
 			selecting: true,
 			hotspot: false
 		}
-		
+
 		gui.add(options, 'wireframe').onChange((e) => {
 			this.enableWirefame = e as boolean;
 			if (e as boolean) {
@@ -173,9 +172,12 @@ export default class GameScene {
 			this.enableSelecting = e as boolean;
 		});
 
+
+
 		gui.add(options, 'hotspot').onChange((e) => {
 			this.enableHotspot = e as boolean;
 		});
+		
 	}
 
 	ModelSetWireframe() {

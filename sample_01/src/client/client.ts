@@ -7,11 +7,11 @@ import Raycaster from './Raycaster';
 import GameScene from './GameScene';
 import Stats from 'three/examples/jsm/libs/stats.module'
 import FristPersonController from './FristPersonController';
+import FileLoader from './FileLoader';
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
-
 
 console.log('threejs version: ' + THREE.REVISION);
 
@@ -70,17 +70,17 @@ composer.addPass(outlinePass);
 
 outlinePass.edgeStrength = 5;
 outlinePass.visibleEdgeColor = new THREE.Color(0x0570fe);
-outlinePass.hiddenEdgeColor =  new THREE.Color(0x0570fe);
+outlinePass.hiddenEdgeColor = new THREE.Color(0x0570fe);
 outlinePass.usePatternTexture = true;
 
 const outlineTexLoader = new THREE.TextureLoader();
-outlineTexLoader.load( '../../imgs/tri_pattern.jpg', function ( texture ) {
+outlineTexLoader.load('../../imgs/tri_pattern.jpg', function (texture) {
 
     outlinePass.patternTexture = texture;
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
 
-} );
+});
 
 
 // raycaster
@@ -108,11 +108,13 @@ raycaster.Events.addEventListener("customEvent", event => {
     tgroup.add(new AxesHelper(3));
 });
 
-
 const cubeGeometry = new THREE.BoxGeometry()
 const cubeMaterial = new THREE.MeshBasicMaterial();
 const textureLoader = new THREE.TextureLoader().load('../../imgs/grid.png');
 cubeMaterial.map = textureLoader;
+
+// file loader
+const fileLoader = new FileLoader();
 
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
 cube.position.y = 7;
